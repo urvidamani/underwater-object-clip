@@ -1,0 +1,33 @@
+             w        h   aspect
+count  14872.0  14872.0  14872.0
+mean     444.9    374.0      1.5
+std      310.0    260.1      1.2
+min       38.0     35.0      0.1
+25%      205.0    161.0      0.8
+50%      376.0    315.0      1.2
+75%      601.0    524.0      1.8
+max     1920.0   1080.0     16.1
+
+class
+Pipe           0.43
+Cup            0.93
+Bottle         1.00
+Tripod         1.02
+Screwdriver    1.03
+Knife          1.05
+Fork           1.12
+Plastic Cup    1.19
+Lure           1.19
+Goggles        1.19
+Scissors       1.21
+Flipper        1.22
+Soda Can       1.27
+Aqua           1.41
+Dive Weight    1.43
+Spoon          1.47
+Car            1.48
+Snorkel        1.64
+LoCo           1.90
+Plastic Bag    2.02
+Case           2.25
+ROV            2.94

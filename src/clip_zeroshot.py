@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import torch
 import open_clip
-from PIL import Image
+from PIL import Image,ImageOps
 from torch.utils.data import DataLoader,Dataset
 from sklearn.metrics import accuracy_score,f1_score,classification_report
 
@@ -13,13 +13,16 @@ rare=["Pipe","Plastic Bag"]
 templates={"Plain":"a photo of a {}","Underwater":"an underwater photo of a {}"}
 dev="cuda"
 
+def pad_square(im):
+    s = max(im.size)
+    return ImageOps.pad(im, (s, s), color=(0, 0, 0))
 class DS(Dataset):
     def __init__(self,paths,tf):
         self.p,self.tf=paths,tf
     def __len__(self):
         return len(self.p)
     def __getitem__(self, index):
-        return self.tf(Image.open(self.p[index]).convert("RGB"))
+        return self.tf(pad_square(Image.open(self.p[index]).convert("RGB")))
     
 def main():
     m=pd.read_csv(manifest)
