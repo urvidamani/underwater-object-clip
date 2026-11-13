@@ -2,6 +2,7 @@ import pandas as pd
 from scipy.stats import binomtest
 
 files={"resnet18":"results/resnet18_predictions.csv",
+       "resnet18_padded":"results/resnet18_padded_predictions.csv",
        "clip_linear":"results/clip_linear_predictions.csv",
        "clip_adapter":"results/clip_adapter_predictions.csv"}
 
@@ -18,3 +19,6 @@ def compare(a,b):
 compare("resnet18","clip_adapter")
 compare("clip_linear","clip_adapter")
 compare("resnet18","clip_linear")
+compare("resnet18_padded","clip_adapter")
+compare("resnet18_padded","clip_linear")
+compare("resnet18","resnet18_padded")
