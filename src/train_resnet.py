@@ -2,6 +2,7 @@ from typing import Any
 
 import pandas as pd
 import numpy as np
+import time
 import torch
 import torch.nn as nn
 from pathlib import Path
@@ -41,6 +42,8 @@ def main():
     dev="cuda"
     preds_all,scores=[],[]
     
+    t0 = time.time()
+    torch.cuda.reset_peak_memory_stats()
     for k in sorted(m["fold"].unique()):
         tr,te=m[m["fold"]!=k],m[m["fold"]==k]
         model=models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
@@ -82,6 +85,8 @@ def main():
         out["pred"]=[classes[i] for i in p]
         preds_all.append(out)
     
+    print(f"Training + eval time (3 folds): {time.time() - t0:.1f} s")
+    print(f"Peak GPU memory: {torch.cuda.max_memory_allocated() / 1e6:.0f} MB")
     s=np.array(scores)
     print(f"\n Accuracy {s[:,0].mean():.3f} +-{s[:,0].std():.3f}")
     print(f"\n Macro-F1 {s[:,1].mean():.3f} +-{s[:,1].std():.3f}")
